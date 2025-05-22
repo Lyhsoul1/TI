@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tech Job Application Form</title>
+  <link rel="icon" href="tech-icon.png" type="image/png" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+      color: #333;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0,0,0,0.55);
+      z-index: 0;
+    }
+
+    form {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.95);
+      max-width: 480px;
+      width: 90%;
+      padding: 25px 20px;
+      margin: 40px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-sizing: border-box;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #0057b8;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      margin-top: 25px;
+      background-color: #0057b8;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #004099;
+    }
+  </style>
+</head>
+<body>
+
+  <form name="tech-job" method="POST" data-netlify="true" enctype="multipart/form-data" action="thanks.html">
+    <input type="hidden" name="form-name" value="tech-job">
+
+    <h2>Tech Job Application</h2>
+
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="full-name" required>
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="phone">Phone Number:</label>
+    <input 
+      type="tel" 
+      id="phone" 
+      name="phone" 
+      placeholder="(123) 456-7890" 
+      pattern="^(\(\d{3}\)\s?|\d{3}[-\s]?)?\d{3}[-\s]?\d{4}$" 
+      required
+      title="Enter a valid phone number">
+
+    <label for="location">City & State:</label>
+    <input type="text" id="location" name="location" required>
+
+    <label for="field">Field of Interest:</label>
+    <select id="field" name="field" required>
+      <option value="" disabled selected>Select your area</option>
+      <option>Software Engineering</option>
+      <option>Data Science</option>
+      <option>DevOps</option>
+      <option>Cybersecurity</option>
+      <option>Product Management</option>
+      <option>Other</option>
+    </select>
+
+    <label for="experience">Years of Experience:</label>
+    <select id="experience" name="experience" required>
+      <option value="" disabled selected>Select duration</option>
+      <option>Less than 1 year</option>
+      <option>1-3 years</option>
+      <option>4-6 years</option>
+      <option>7+ years</option>
+    </select>
+
+    <label for="availability">Availability:</label>
+    <select id="availability" name="availability" required>
+      <option value="" disabled selected>Select availability</option>
+      <option>Full-Time</option>
+      <option>Part-Time</option>
+      <option>Contract</option>
+      <option>Remote Only</option>
+    </select>
+
+    <label for="resume">Upload Your Resume:</label>
+    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+
+    <label for="notes">Additional Notes:</label>
+    <textarea id="notes" name="notes" placeholder="Let us know anything important..."></textarea>
+
+    <button type="submit">Submit Application</button>
+  </form>
+
+</body>
+</html>
