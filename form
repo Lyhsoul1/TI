@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tech Job Application Form</title>
-  <link rel="icon" href="tech-icon.png" type="image/png" />
+  <title>IT Job Application Form</title>
+  <link rel="icon" href="code-icon.png" type="image/png" />
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -35,9 +35,9 @@
       position: relative;
       z-index: 1;
       background: rgba(255, 255, 255, 0.95);
-      max-width: 480px;
+      max-width: 460px;
       width: 90%;
-      padding: 25px 20px;
+      padding: 30px 22px;
       margin: 40px 0;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -47,7 +47,7 @@
     h2 {
       text-align: center;
       margin-bottom: 20px;
-      color: #0057b8;
+      color: #007acc;
     }
 
     label {
@@ -57,7 +57,7 @@
       font-size: 0.95rem;
     }
 
-    input, select, textarea {
+    input, select {
       width: 100%;
       padding: 8px 10px;
       margin-top: 5px;
@@ -67,14 +67,13 @@
       box-sizing: border-box;
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 80px;
+    input[type="file"] {
+      padding: 3px 5px;
     }
 
     button {
       margin-top: 25px;
-      background-color: #0057b8;
+      background-color: #007acc;
       color: white;
       border: none;
       padding: 12px 0;
@@ -87,16 +86,16 @@
     }
 
     button:hover {
-      background-color: #004099;
+      background-color: #005fa3;
     }
   </style>
 </head>
 <body>
 
-  <form name="tech-job" method="POST" data-netlify="true" enctype="multipart/form-data" action="thanks.html">
-    <input type="hidden" name="form-name" value="tech-job">
+  <form name="it-job" method="POST" data-netlify="true" enctype="multipart/form-data" action="thanks.html">
+    <input type="hidden" name="form-name" value="it-job">
 
-    <h2>Tech Job Application</h2>
+    <h2>IT Job Application Form</h2>
 
     <label for="name">Full Name:</label>
     <input type="text" id="name" name="full-name" required>
@@ -110,47 +109,42 @@
       id="phone" 
       name="phone" 
       placeholder="(123) 456-7890" 
-      pattern="^(\(\d{3}\)\s?|\d{3}[-\s]?)?\d{3}[-\s]?\d{4}$" 
-      required
-      title="Enter a valid phone number">
+      required>
 
-    <label for="location">City & State:</label>
+    <label for="location">Current Location:</label>
     <input type="text" id="location" name="location" required>
 
-    <label for="field">Field of Interest:</label>
-    <select id="field" name="field" required>
+    <label for="role">Area of Interest:</label>
+    <select id="role" name="interest-area" required>
       <option value="" disabled selected>Select your area</option>
-      <option>Software Engineering</option>
-      <option>Data Science</option>
-      <option>DevOps</option>
-      <option>Cybersecurity</option>
-      <option>Product Management</option>
+      <option>Frontend Developer</option>
+      <option>Backend Developer</option>
+      <option>Full Stack Engineer</option>
+      <option>Data Analyst</option>
+      <option>DevOps / Cloud Engineer</option>
+      <option>UI/UX Designer</option>
       <option>Other</option>
     </select>
 
     <label for="experience">Years of Experience:</label>
     <select id="experience" name="experience" required>
-      <option value="" disabled selected>Select duration</option>
+      <option value="" disabled selected>Select</option>
       <option>Less than 1 year</option>
       <option>1-3 years</option>
-      <option>4-6 years</option>
-      <option>7+ years</option>
+      <option>3-5 years</option>
+      <option>5+ years</option>
     </select>
 
     <label for="availability">Availability:</label>
     <select id="availability" name="availability" required>
       <option value="" disabled selected>Select availability</option>
-      <option>Full-Time</option>
-      <option>Part-Time</option>
-      <option>Contract</option>
-      <option>Remote Only</option>
+      <option>Immediately</option>
+      <option>Within 2 Weeks</option>
+      <option>1 Month</option>
     </select>
 
-    <label for="resume">Upload Your Resume:</label>
-    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
-
-    <label for="notes">Additional Notes:</label>
-    <textarea id="notes" name="notes" placeholder="Let us know anything important..."></textarea>
+    <label for="resume">Resume (PDF/DOC):</label>
+    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
 
     <button type="submit">Submit Application</button>
   </form>
