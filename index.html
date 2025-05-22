@@ -1,77 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Work in Tech</title>
-  <link rel="icon" href="code-icon.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hiring Tech Talent – California</title>
+  <link rel="icon" href="tech-icon.png" type="image/png" />
   <style>
     body {
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      height: 100vh;
-      background: url('https://images.unsplash.com/photo-1581092334445-1f788ba24f60?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
       background-size: cover;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       color: #fff;
-      position: relative;
       text-align: center;
+      padding: 0;
     }
 
-    body::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.65);
-      z-index: 0;
-    }
-
-    main {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-      padding: 20px;
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.75);
+      min-height: 100vh;
+      padding: 40px 20px;
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
+      font-size: 2.8rem;
+      color: #ffcc00;
+      margin-bottom: 10px;
     }
 
     p {
-      font-size: 1.25rem;
-      margin-bottom: 30px;
-      line-height: 1.6;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 30px;
     }
 
-    a {
+    a.button {
       display: inline-block;
-      padding: 12px 25px;
-      background: #00bfff;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 6px;
+      background-color: #ffcc00;
+      color: #000;
+      padding: 14px 28px;
       font-weight: bold;
-      transition: background 0.3s ease;
+      font-size: 1.1rem;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      margin-bottom: 40px;
     }
 
-    a:hover {
-      background: #008ecc;
+    a.button:hover {
+      background-color: #e6b800;
+    }
+
+    .map {
+      margin: 40px auto;
+      max-width: 90%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .testimonials {
+      margin: 60px auto;
+      max-width: 800px;
+    }
+
+    .testimonial {
+      background-color: rgba(255, 255, 255, 0.08);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      font-style: italic;
+      text-align: left;
+    }
+
+    .testimonial strong {
+      display: block;
+      margin-top: 10px;
+      color: #ffcc00;
+    }
+
+    .faq-accordion {
+      max-width: 800px;
+      margin: 40px auto;
+      text-align: left;
+    }
+
+    .faq-question {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: none;
+      outline: none;
+      padding: 18px 20px;
+      text-align: left;
+      font-size: 1.1rem;
+      color: #ffcc00;
+      cursor: pointer;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      background-color: rgba(255, 255, 255, 0.06);
+      border-left: 4px solid #ffcc00;
+      padding: 0 20px;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .faq-answer p {
+      margin: 15px 0;
+      color: #eee;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding: 15px 20px;
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      a.button {
+        font-size: 1rem;
+        padding: 12px 22px;
+      }
+
+      .testimonial {
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Work in Tech</h1>
-    <p>
-      The US base salary range for full-time IT roles is typically between <strong>$60,000 - $200,000</strong> per year, or <strong>$5,000 - $20,000</strong> monthly depending on your experience, skills, and location.<br>
-      Bonus, equity, and benefits may also apply.
-    </p>
-    <a href="form.html">Apply Now</a>
-  </main>
+
+<div class="overlay">
+
+  <h1>Now Hiring Tech Talent – California</h1>
+  <p><strong>Earn between <span style="color: #ffcc00;">$15,000 – $20,000/month</span><br>based on experience and role.</strong><br>
+     Remote and on-site positions available statewide.</p>
+
+  <a href="form.html" class="button">Apply Now</a>
+
+  <div class="map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254333.98961865824!2d-122.68194490206886!3d37.75781592541071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808c2a4e7a67%3A0x2f34be2f85b3e78b!2sCalifornia!5e0!3m2!1sen!2sus!4v1716390633364!5m2!1sen!2sus"
+      width="100%"
+      height="300"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <div class="testimonials">
+    <div class="testimonial">
+      “I joined as a frontend developer and got a remote position paying $17k/month. Highly recommended!”
+      <strong>– Alicia M., San Diego | 8 months</strong>
+    </div>
+    <div class="testimonial">
+      “Within a week of applying, I landed a backend role at a tech startup. Great process and great pay.”
+      <strong>– Daniel R., San Jose | 1 year</strong>
+    </div>
+  </div>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-accordion">
+    <div class="faq-item">
+      <button class="faq-question">Are these jobs remote or on-site?</button>
+      <div class="faq-answer">
+        <p>Both. Many companies offer remote-first roles, but hybrid and on-site options are also available.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">What kind of roles are available?</button>
+      <div class="faq-answer">
+        <p>We’re hiring for Frontend, Backend, Full Stack, DevOps, Data, and PM roles across California.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">What experience do I need?</button>
+      <div class="faq-answer">
+        <p>Opportunities exist for both junior and senior developers. Some roles require 1+ year of experience.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">How soon will I be contacted?</button>
+      <div class="faq-answer">
+        <p>Most candidates receive a response within 24–48 hours after submitting the form.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Avg. Salary: $15,000 – $20,000/month · $80,000 – $200,000/year<br>
+    Remote & On-site Jobs · Statewide in California</p>
+    <p>© 2025 Hiring Tech CA. All rights reserved.</p>
+  </footer>
+
+</div>
+
+<script>
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const btn = item.querySelector('.faq-question');
+    btn.addEventListener('click', () => {
+      faqItems.forEach(i => {
+        if (i !== item) i.classList.remove('open');
+      });
+      item.classList.toggle('open');
+    });
+  });
+</script>
+
 </body>
 </html>
