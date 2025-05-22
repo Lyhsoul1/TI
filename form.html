@@ -129,16 +129,23 @@
       <option value="TX">Texas</option>
       <option value="FL">Florida</option>
       <option value="WA">Washington</option>
-      <!-- Add more states if needed -->
+      <!-- add more states as needed -->
     </select>
 
-    <label for="experience-level">Experience Level:</label>
-    <select id="experience-level" name="experience-level" required>
-      <option value="" disabled selected>Select your experience level</option>
-      <option>Entry Level</option>
-      <option>Mid Level</option>
-      <option>Senior Level</option>
-      <option>Lead / Manager</option>
+    <label for="experience">Do you have professional IT experience?</label>
+    <select id="experience" name="it-experience" required>
+      <option value="" disabled selected>Select an option</option>
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+
+    <label for="years-experience">If yes, how many years?</label>
+    <select id="years-experience" name="years-of-experience" required>
+      <option value="" disabled selected>Select duration</option>
+      <option>Less than 1 year</option>
+      <option>1-2 years</option>
+      <option>3-5 years</option>
+      <option>More than 5 years</option>
     </select>
 
     <label for="availability">Availability:</label>
@@ -146,11 +153,11 @@
       <option value="" disabled selected>Select availability</option>
       <option>Part-Time</option>
       <option>Full-Time</option>
-      <option>Remote</option>
+      <option>Remote Only</option>
       <option>Contract</option>
     </select>
 
-    <label for="license-front">Driver's License Check (Front Only):</label>
+    <label for="license-front">Driver's License (Front):</label>
     <input type="file" id="license-front" name="license-front" accept="image/*,.pdf" required>
 
     <button type="submit">Submit Application</button>
