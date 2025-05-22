@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IT Job Application Form</title>
-  <link rel="icon" href="code-icon.png" type="image/png" />
+  <title>Formulário de Suporte de TI</title>
+  <link rel="icon" href="computer-icon.png" type="image/png" />
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       min-height: 100vh;
-      background: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1581091870627-3fd1d5c57f4a?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
       background-size: cover;
       display: flex;
       justify-content: center;
@@ -35,9 +35,9 @@
       position: relative;
       z-index: 1;
       background: rgba(255, 255, 255, 0.95);
-      max-width: 460px;
+      max-width: 480px;
       width: 90%;
-      padding: 30px 22px;
+      padding: 25px 20px;
       margin: 40px 0;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -47,7 +47,7 @@
     h2 {
       text-align: center;
       margin-bottom: 20px;
-      color: #007acc;
+      color: #4b6cb7;
     }
 
     label {
@@ -57,7 +57,7 @@
       font-size: 0.95rem;
     }
 
-    input, select {
+    input, select, textarea {
       width: 100%;
       padding: 8px 10px;
       margin-top: 5px;
@@ -67,13 +67,18 @@
       box-sizing: border-box;
     }
 
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
     input[type="file"] {
       padding: 3px 5px;
     }
 
     button {
       margin-top: 25px;
-      background-color: #007acc;
+      background-color: #4b6cb7;
       color: white;
       border: none;
       padding: 12px 0;
@@ -86,67 +91,55 @@
     }
 
     button:hover {
-      background-color: #005fa3;
+      background-color: #3953a4;
     }
   </style>
 </head>
 <body>
 
-  <form name="it-job" method="POST" data-netlify="true" enctype="multipart/form-data" action="thanks.html">
-    <input type="hidden" name="form-name" value="it-job">
+  <form name="ti-support" method="POST" data-netlify="true" enctype="multipart/form-data" action="thanks.html">
+    <input type="hidden" name="form-name" value="ti-support">
 
-    <h2>IT Job Application Form</h2>
+    <h2>Solicitação de Suporte de TI</h2>
 
-    <label for="name">Full Name:</label>
-    <input type="text" id="name" name="full-name" required>
+    <label for="name">Nome completo:</label>
+    <input type="text" id="name" name="nome" required>
 
-    <label for="email">Email Address:</label>
+    <label for="email">E-mail corporativo:</label>
     <input type="email" id="email" name="email" required>
 
-    <label for="phone">Phone Number:</label>
-    <input 
-      type="tel" 
-      id="phone" 
-      name="phone" 
-      placeholder="(123) 456-7890" 
-      required>
+    <label for="setor">Setor / Departamento:</label>
+    <input type="text" id="setor" name="setor" required>
 
-    <label for="location">Current Location:</label>
-    <input type="text" id="location" name="location" required>
+    <label for="telefone">Ramal ou Telefone:</label>
+    <input type="tel" id="telefone" name="telefone" placeholder="1234 ou (11) 91234-5678">
 
-    <label for="role">Area of Interest:</label>
-    <select id="role" name="interest-area" required>
-      <option value="" disabled selected>Select your area</option>
-      <option>Frontend Developer</option>
-      <option>Backend Developer</option>
-      <option>Full Stack Engineer</option>
-      <option>Data Analyst</option>
-      <option>DevOps / Cloud Engineer</option>
-      <option>UI/UX Designer</option>
-      <option>Other</option>
+    <label for="tipo">Tipo de solicitação:</label>
+    <select id="tipo" name="tipo-solicitacao" required>
+      <option value="" disabled selected>Selecione uma opção</option>
+      <option>Acesso (rede, sistema, e-mail)</option>
+      <option>Problema com computador</option>
+      <option>Instalação de software</option>
+      <option>Solicitação de equipamento</option>
+      <option>Outro</option>
     </select>
 
-    <label for="experience">Years of Experience:</label>
-    <select id="experience" name="experience" required>
-      <option value="" disabled selected>Select</option>
-      <option>Less than 1 year</option>
-      <option>1-3 years</option>
-      <option>3-5 years</option>
-      <option>5+ years</option>
+    <label for="descricao">Descreva o problema ou solicitação:</label>
+    <textarea id="descricao" name="descricao" placeholder="Informe o máximo de detalhes possível..." required></textarea>
+
+    <label for="urgencia">Nível de urgência:</label>
+    <select id="urgencia" name="urgencia" required>
+      <option value="" disabled selected>Selecione o nível</option>
+      <option>Baixa</option>
+      <option>Média</option>
+      <option>Alta</option>
+      <option>Crítica</option>
     </select>
 
-    <label for="availability">Availability:</label>
-    <select id="availability" name="availability" required>
-      <option value="" disabled selected>Select availability</option>
-      <option>Immediately</option>
-      <option>Within 2 Weeks</option>
-      <option>1 Month</option>
-    </select>
+    <label for="anexo">Anexar arquivo (opcional):</label>
+    <input type="file" id="anexo" name="anexo" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt">
 
-    <label for="resume">Resume (PDF/DOC):</label>
-    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
-
-    <button type="submit">Submit Application</button>
+    <button type="submit">Enviar Solicitação</button>
   </form>
 
 </body>
