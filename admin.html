@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Panel - View Applications</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212;
+      color: #eee;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #ff7f50;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #login-container, #data-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 15px;
+    }
+    button {
+      background: #ff7f50;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background: #e0673a;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #555;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #ff7f50;
+      color: #fff;
+    }
+    tr:nth-child(even) {
+      background: #2a2a2a;
+    }
+    #error-message {
+      color: #ff4c4c;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Admin Panel - View Applications</h1>
+
+  <div id="login-container">
+    <p>Enter password to access applications:</p>
+    <input type="password" id="admin-password" placeholder="Password" />
+    <button id="login-btn">Login</button>
+    <p id="error-message"></p>
+  </div>
+
+  <div id="data-container" style="display:none;">
+    <h2>Applications List</h2>
+    <table id="applications-table">
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Experience</th>
+          <th>Years</th>
+          <th>Availability</th>
+        </tr>
+      </thead>
+      <tbody id="applications-body">
+        <!-- Dados vão aparecer aqui -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyByO26m-mncrytPPf6fAeeUKldRmhvmJSc",
+      authDomain: "formulario-f4ad7.firebaseapp.com",
+      projectId: "formulario-f4ad7",
+      storageBucket: "formulario-f4ad7.firebasestorage.app",
+      messagingSenderId: "164607570283",
+      appId: "1:164607570283:web:54227b043da4ff01795c2e"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Senha simples
+    const correctPassword = "admin123"; // Troque aqui para sua senha
+
+    const loginContainer = document.getElementById('login-container');
+    const dataContainer = document.getElementById('data-container');
+    const loginBtn = document.getElementById('login-btn');
+    const passwordInput = document.getElementById('admin-password');
+    const errorMessage = document.getElementById('error-message');
+    const applicationsBody = document.getElementById('applications-body');
+
+    loginBtn.addEventListener('click', async () => {
+      errorMessage.textContent = '';
+      if(passwordInput.value === correctPassword) {
+        loginContainer.style.display = 'none';
+        dataContainer.style.display = 'block';
+        await loadApplications();
+      } else {
+        errorMessage.textContent = 'Incorrect password, try again.';
+      }
+    });
+
+    async function loadApplications() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "applications"));
+        if (querySnapshot.empty) {
+          applicationsBody.innerHTML = "<tr><td colspan='8' style='text-align:center;'>No applications found.</td></tr>";
+          return;
+        }
+
+        applicationsBody.innerHTML = ""; // Limpa tabela antes de preencher
+
+        querySnapshot.forEach(doc => {
+          const data = doc.data();
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${data["full-name"] || ""}</td>
+            <td>${data.email || ""}</td>
+            <td>${data["mobile-phone"] || ""}</td>
+            <td>${data.city || ""}</td>
+            <td>${data.state || ""}</td>
+            <td>${data["it-experience"] || ""}</td>
+            <td>${data["years-of-experience"] || ""}</td>
+            <td>${data.availability || ""}</td>
+          `;
+          applicationsBody.appendChild(tr);
+        });
+      } catch (error) {
+        applicationsBody.innerHTML = `<tr><td colspan='8' style='color:#f55;'>Error loading data: ${error.message}</td></tr>`;
+      }
+    }
+  </script>
+
+</body>
+</html>
