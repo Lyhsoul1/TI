@@ -3,109 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin Panel - View Applications</title>
+  <title>Admin - Applications</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #121212;
-      color: #eee;
-      margin: 0;
-      padding: 20px;
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f9f9f9;
+      color: #333;
     }
     h1 {
-      color: #ff7f50;
-      text-align: center;
+      color: #222;
       margin-bottom: 20px;
-    }
-    #login-container, #data-container {
-      max-width: 700px;
-      margin: 0 auto;
-      background: #222;
-      padding: 20px;
-      border-radius: 10px;
-    }
-    input[type="password"] {
-      width: 100%;
-      padding: 12px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: none;
-      margin-bottom: 15px;
-    }
-    button {
-      background: #ff7f50;
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
-      font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
-    }
-    button:hover {
-      background: #e0673a;
+      text-align: center;
     }
     table {
-      width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
     }
     th, td {
-      border: 1px solid #555;
-      padding: 10px;
+      border: 1px solid #ddd;
+      padding: 12px 15px;
       text-align: left;
+      font-size: 0.9rem;
     }
     th {
-      background: #ff7f50;
-      color: #fff;
+      background-color: #ffcc00;
+      color: #222;
+      font-weight: 700;
     }
     tr:nth-child(even) {
-      background: #2a2a2a;
+      background-color: #f2f2f2;
     }
-    #error-message {
-      color: #ff4c4c;
-      margin-bottom: 15px;
+    a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .loading {
       text-align: center;
+      margin-top: 100px;
+      font-size: 1.2rem;
+      color: #666;
     }
   </style>
 </head>
 <body>
 
-  <h1>Admin Panel - View Applications</h1>
+  <h1>Submitted Applications</h1>
 
-  <div id="login-container">
-    <p>Enter password to access applications:</p>
-    <input type="password" id="admin-password" placeholder="Password" />
-    <button id="login-btn">Login</button>
-    <p id="error-message"></p>
-  </div>
+  <div id="loading" class="loading">Loading data...</div>
 
-  <div id="data-container" style="display:none;">
-    <h2>Applications List</h2>
-    <table id="applications-table">
-      <thead>
-        <tr>
-          <th>Full Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Experience</th>
-          <th>Years</th>
-          <th>Availability</th>
-        </tr>
-      </thead>
-      <tbody id="applications-body">
-        <!-- Dados vão aparecer aqui -->
-      </tbody>
-    </table>
-  </div>
+  <table id="applications-table" style="display:none;">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Experience</th>
+        <th>Years</th>
+        <th>Availability</th>
+        <th>Image 1</th>
+        <th>Image 2</th>
+        <!-- Adicione mais colunas se necessário -->
+      </tr>
+    </thead>
+    <tbody id="applications-body"></tbody>
+  </table>
 
-  <!-- Firebase SDK -->
+  <!-- Firebase App (the core Firebase SDK) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+    import {
+      getFirestore,
+      collection,
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 
+    // Sua configuração Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyByO26m-mncrytPPf6fAeeUKldRmhvmJSc",
       authDomain: "formulario-f4ad7.firebaseapp.com",
@@ -115,43 +99,30 @@
       appId: "1:164607570283:web:54227b043da4ff01795c2e"
     };
 
+    // Inicializa Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Senha simples
-    const correctPassword = "admin123"; // Troque aqui para sua senha
-
-    const loginContainer = document.getElementById('login-container');
-    const dataContainer = document.getElementById('data-container');
-    const loginBtn = document.getElementById('login-btn');
-    const passwordInput = document.getElementById('admin-password');
-    const errorMessage = document.getElementById('error-message');
-    const applicationsBody = document.getElementById('applications-body');
-
-    loginBtn.addEventListener('click', async () => {
-      errorMessage.textContent = '';
-      if(passwordInput.value === correctPassword) {
-        loginContainer.style.display = 'none';
-        dataContainer.style.display = 'block';
-        await loadApplications();
-      } else {
-        errorMessage.textContent = 'Incorrect password, try again.';
-      }
-    });
-
     async function loadApplications() {
+      const loadingDiv = document.getElementById('loading');
+      const table = document.getElementById('applications-table');
+      const applicationsBody = document.getElementById('applications-body');
+
       try {
         const querySnapshot = await getDocs(collection(db, "applications"));
         if (querySnapshot.empty) {
-          applicationsBody.innerHTML = "<tr><td colspan='8' style='text-align:center;'>No applications found.</td></tr>";
+          loadingDiv.textContent = "No applications found.";
           return;
         }
-
-        applicationsBody.innerHTML = ""; // Limpa tabela antes de preencher
 
         querySnapshot.forEach(doc => {
           const data = doc.data();
           const tr = document.createElement('tr');
+
+          // URLs das imagens, se existirem
+          const img1 = data.image1 ? `<a href="${data.image1}" target="_blank" rel="noopener noreferrer">Image 1</a>` : "";
+          const img2 = data.image2 ? `<a href="${data.image2}" target="_blank" rel="noopener noreferrer">Image 2</a>` : "";
+
           tr.innerHTML = `
             <td>${data["full-name"] || ""}</td>
             <td>${data.email || ""}</td>
@@ -161,13 +132,23 @@
             <td>${data["it-experience"] || ""}</td>
             <td>${data["years-of-experience"] || ""}</td>
             <td>${data.availability || ""}</td>
+            <td>${img1}</td>
+            <td>${img2}</td>
           `;
+
           applicationsBody.appendChild(tr);
         });
+
+        loadingDiv.style.display = 'none';
+        table.style.display = 'table';
+
       } catch (error) {
-        applicationsBody.innerHTML = `<tr><td colspan='8' style='color:#f55;'>Error loading data: ${error.message}</td></tr>`;
+        loadingDiv.textContent = "Error loading data: " + error.message;
+        console.error("Error fetching documents: ", error);
       }
     }
+
+    window.onload = loadApplications;
   </script>
 
 </body>
