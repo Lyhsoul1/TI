@@ -2,113 +2,97 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join the Future of Tech</title>
-  <link rel="icon" href="tech-icon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Work in Tech – Apply Now</title>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
-    body {
+    body, html {
+      height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #000 url('https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      color: white;
+    }
+    .hero {
+      background: url('A_job_recruitment_digital_image_showcases_a_modern.png') no-repeat center center fixed;
       background-size: cover;
-      height: 100vh;
-      color: #fff;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
+      padding: 20px;
       position: relative;
     }
-
-    body::before {
-      content: "";
+    .overlay {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.6);
       z-index: 0;
     }
-
-    .container {
-      position: relative;
+    .content {
       z-index: 1;
-      max-width: 900px;
-      padding: 30px 20px;
+      max-width: 700px;
     }
-
     h1 {
       font-size: 3rem;
-      color: #00ffc3;
       margin-bottom: 20px;
     }
-
     p {
-      font-size: 1.4rem;
-      margin-bottom: 25px;
+      font-size: 1.25rem;
+      margin-bottom: 15px;
       line-height: 1.6;
-      color: #ddd;
     }
-
     .benefits {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-      color: #ccc;
+      text-align: left;
+      margin: 20px auto;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 12px;
     }
-
     .benefits li {
-      margin: 10px 0;
-      list-style: none;
-    }
-
-    .btn {
-      background-color: #ff7f50;
-      color: white;
-      padding: 15px 35px;
+      margin-bottom: 10px;
       font-size: 1.1rem;
-      font-weight: bold;
+    }
+    .apply-button {
+      margin-top: 25px;
+      background-color: #ff7f50;
       border: none;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      font-weight: bold;
       border-radius: 10px;
       cursor: pointer;
-      text-decoration: none;
       transition: background-color 0.3s ease;
+      text-decoration: none;
+      color: white;
+      display: inline-block;
     }
-
-    .btn:hover {
+    .apply-button:hover {
       background-color: #e0673a;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2.2rem;
-      }
-      p {
-        font-size: 1.1rem;
-      }
-      .benefits {
-        font-size: 1rem;
-      }
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <h1>Work in Tech – Your Way</h1>
-    <p>Join our team of elite developers and engineers. Whether you prefer working from home or the office, we've got you covered.</p>
-    <ul class="benefits">
-      <li>💻 100% Remote or On-site (Hybrid Options Available)</li>
-      <li>💵 Earn $15,000–$20,000/month</li>
-      <li>📅 Flexible Hours & Contract Options</li>
-      <li>🌎 Work from Anywhere in the U.S.</li>
-      <li>🚀 Career Growth & Top-Tier Projects</li>
-    </ul>
-    <a href="form.html" class="btn">Apply Now</a>
+  <div class="hero">
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>WORK IN TECH – YOUR WAY</h1>
+      <p>Join our team of elite developers and engineers.</p>
+      <div class="benefits">
+        <ul>
+          <li>💼 100% Remote, On-site or Hybrid Options</li>
+          <li>💰 Earn $15,000–$20,000/month or $30/hour</li>
+          <li>🕒 Flexible Hours & Contract Positions</li>
+          <li>🌎 Work From Anywhere in the U.S.</li>
+          <li>🚀 Career Growth & Top-Tier Projects</li>
+        </ul>
+      </div>
+      <a href="form.html" class="apply-button">APPLY NOW</a>
+    </div>
   </div>
-
 </body>
 </html>
