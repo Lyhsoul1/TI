@@ -7,72 +7,191 @@
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
+      margin: 0; 
       padding: 0;
     }
     body, html {
       height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: white;
+      background: #0d1117;
+      scroll-behavior: smooth;
     }
     .hero {
-      background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ3MCIgaGVpZ2h0PSI5MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8cmVjdCB3aWR0aD0iMTQ3MCIgaGVpZ2h0PSI5MDAiIGZpbGw9IiMwMDIzNGUiLz4KICAgIDxsaW5lIHgxPSI1MCIgeTE9IjE1MCIgeDI9IjEzMDAiIHkyPSIxNTAiIHN0cm9rZT0iI2EzZWZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgICA8bGluZSB4MT0iNTAiIHkxPSIyNTAiIHgyPSIxMzAwIiB5Mj0iMjUwIiBzdHJva2U9IiNhM2VmZmYiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgPGxpbmUgeDE9IjUwIiB5MT0iMzUwIiB4Mj0iMTMwMCIgeTI9IjM1MCIgc3Ryb2tlPSIjYTNlZmZmIiBzdHJva2Utd2lkdGg9IjIiLz4KICAgIDxjaXJjbGUgY3g9IjQwMCIgY3k9IjQ1MCIgcj0iMjAiIGZpbGw9IiM1YmZmZmYiIG9wYWNpdHk9IjAuNSIvPgogICAgPGNpcmNsZSBjeD0iODAwIiBjeT0iNjAwIiByPSIyNSIgZmlsbD0iIzI0NjY5ZiIgb3BhY2l0eT0iMC42Ii8+CiAgICA8Y2lyY2xlIGN4PSIxMDAwIiBjeT0iNDAwIiByPSIxNSIgZmlsbD0iIzI5NzlmZiIgb3BhY2l0eT0iMC43Ii8+CiAgICA8cmVjdCB4PSI5MDAiIHk9IjY1MCIgd2lkdGg9IjI1MCIgaGVpZ2h0PSI0MCIgZmlsbD0iIzA0MTdFNyIgb3BhY2l0eT0iMC42IiByeD0iMTAiLz4KICAgIDxwYXRoIGQ9Ik0xMDAwIDY1MCAxMTAwIDc1MCIgc3Ryb2tlPSIjYjljZmZmIiBzdHJva2Utd2lkdGg9IjUiIG9wYWNpdHk9IjAuNSIvPgo8L3N2Zz4=') no-repeat center center fixed;
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
       background-size: cover;
-      height: 100%;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 20px;
-      position: relative;
+      padding: 0 20px;
     }
     .overlay {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.7);
       z-index: 0;
     }
     .content {
+      position: relative;
       z-index: 1;
       max-width: 700px;
+      animation: fadeInUp 1s ease forwards;
     }
     h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px #ff7f50;
+    }
+    h2 {
+      font-weight: 400;
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      color: #ff7f50;
+      text-shadow: 0 0 6px #ff7f50;
     }
     p {
-      font-size: 1.25rem;
-      margin-bottom: 15px;
-      line-height: 1.6;
+      font-size: 1.3rem;
+      line-height: 1.8;
+      margin-bottom: 25px;
+      color: #ddd;
+      text-shadow: 0 0 3px black;
     }
     .benefits {
+      background: rgba(255, 127, 80, 0.15);
+      border-radius: 15px;
+      padding: 25px 30px;
+      margin: 20px auto 40px;
+      max-width: 600px;
+      box-shadow: 0 0 25px rgba(255, 127, 80, 0.4);
       text-align: left;
-      margin: 20px auto;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.15rem;
+      line-height: 1.5;
+    }
+    .benefits ul {
+      list-style: none;
     }
     .benefits li {
-      margin-bottom: 10px;
-      font-size: 1.1rem;
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 28px;
+      color: #ffe6d1;
+    }
+    .benefits li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #ff7f50;
+      font-weight: bold;
+      font-size: 1.2rem;
     }
     .apply-button {
-      margin-top: 25px;
       background-color: #ff7f50;
       border: none;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      border-radius: 10px;
+      padding: 16px 36px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      border-radius: 12px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
       text-decoration: none;
       color: white;
       display: inline-block;
+      box-shadow: 0 6px 15px rgba(255, 127, 80, 0.6);
+      user-select: none;
     }
-    .apply-button:hover {
+    .apply-button:hover, .apply-button:focus {
       background-color: #e0673a;
+      box-shadow: 0 8px 20px rgba(224, 103, 58, 0.9);
+      outline: none;
+    }
+
+    /* New Section: Stats */
+    .stats {
+      background: #141b22;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+      text-align: center;
+      color: #ff7f50;
+      box-shadow: inset 0 0 40px #ff7f50;
+    }
+    .stat-item {
+      flex: 1 1 150px;
+      font-weight: 700;
+      font-size: 2.3rem;
+      letter-spacing: 2px;
+      transition: transform 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .stat-item small {
+      display: block;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #fff3e6;
+      margin-top: 8px;
+    }
+    .stat-item:hover {
+      transform: scale(1.1);
+      color: #ffc49b;
+    }
+
+    /* Footer */
+    footer {
+      background: #0a0f14;
+      padding: 25px 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      user-select: none;
+      box-shadow: inset 0 2px 10px #ff7f50;
+    }
+    footer a {
+      color: #ff7f50;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #e0673a;
+      text-decoration: underline;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.4rem;
+      }
+      .benefits {
+        font-size: 1rem;
+        padding: 20px;
+      }
+      .stats {
+        gap: 30px;
+      }
+      .stat-item {
+        font-size: 1.8rem;
+      }
     }
   </style>
 </head>
@@ -81,10 +200,11 @@
     <div class="overlay"></div>
     <div class="content">
       <h1>WORK IN TECH – YOUR WAY</h1>
-      <p>Join our team of elite developers and engineers.</p>
+      <h2>Build the Future of Technology with Us</h2>
+      <p>Join our team of elite developers and engineers shaping the digital world of tomorrow.</p>
       <div class="benefits">
         <ul>
-          <li>💼 100% Remote, On-site or Hybrid Options</li>
+          <li>💼 100% Remote, On-site, or Hybrid Options</li>
           <li>💰 Earn $15,000–$20,000/month or $30/hour</li>
           <li>🕒 Flexible Hours & Contract Positions</li>
           <li>🌎 Work From Anywhere in the U.S.</li>
@@ -94,5 +214,26 @@
       <a href="form.html" class="apply-button">APPLY NOW</a>
     </div>
   </div>
+
+  <section class="stats" aria-label="Statistics about Work in Tech">
+    <div class="stat-item" tabindex="0">
+      250+ <small>Projects Completed</small>
+    </div>
+    <div class="stat-item" tabindex="0">
+      98% <small>Employee Satisfaction</small>
+    </div>
+    <div class="stat-item" tabindex="0">
+      150+ <small>Global Clients</small>
+    </div>
+    <div class="stat-item" tabindex="0">
+      20+ <small>New Technologies Used</small>
+    </div>
+  </section>
+
+  <footer>
+    Made with ❤️ by Work in Tech &mdash; <a href="mailto:contact@workintech.com">Contact Us</a> | Follow us on 
+    <a href="https://twitter.com/workintech" target="_blank" rel="noopener noreferrer">Twitter</a>, 
+    <a href="https://linkedin.com/company/workintech" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </footer>
 </body>
 </html>
