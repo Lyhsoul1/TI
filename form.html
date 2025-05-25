@@ -3,119 +3,188 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IT Job Application Form</title>
-  <link rel="icon" href="tech-icon.png" type="image/png" />
+  <title>Apply to Work in Tech</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
-      background-size: cover;
+    @import url('https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap');
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body, html {
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding-top: 50px;
-      color: #333;
+      padding: 40px 20px;
       position: relative;
+      min-height: 100vh;
+      overflow-y: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     body::before {
       content: "";
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(13, 17, 23, 0.85);
       z-index: 0;
     }
     form {
       position: relative;
       z-index: 1;
-      background: #fff;
-      max-width: 400px;
-      width: 90%;
-      border-radius: 15px;
-      padding: 30px 25px;
-      box-shadow: 0 0 15px 4px #ff7f50;
+      background: #12181f;
+      max-width: 480px;
+      width: 100%;
+      border-radius: 18px;
+      padding: 30px 30px 40px;
+      box-shadow: 0 0 30px 6px rgba(255, 127, 80, 0.5);
       box-sizing: border-box;
+      user-select: none;
+      transition: box-shadow 0.3s ease;
+    }
+    form:hover {
+      box-shadow: 0 0 40px 10px rgba(255, 127, 80, 0.8);
     }
     h2 {
       text-align: center;
-      margin-bottom: 25px;
       color: #ff7f50;
       font-weight: 700;
-      font-size: 1.8rem;
+      font-size: 2rem;
+      margin-bottom: 28px;
+      text-shadow: 0 0 10px #ff7f50;
     }
     label {
       display: block;
-      margin-top: 15px;
+      margin-top: 16px;
       font-weight: 600;
-      color: #444;
-      font-size: 0.95rem;
+      color: #ffa66b;
+      font-size: 1rem;
+      user-select: text;
     }
-    input, select {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    input[type="file"] {
       width: 100%;
-      padding: 9px 12px;
+      padding: 11px 14px;
       margin-top: 6px;
       border: 2px solid #ff7f50;
-      border-radius: 8px;
+      border-radius: 12px;
+      background: #1e2732;
+      color: #fff;
       font-size: 1rem;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
       box-sizing: border-box;
-      transition: border-color 0.3s ease;
-    }
-    input:focus, select:focus {
-      outline: none;
-      border-color: #ff4500;
-      background-color: #fff7f0;
     }
     input[type="file"] {
-      padding: 6px 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    select:focus,
+    input[type="file"]:focus {
+      outline: none;
+      border-color: #ff4500;
+      background-color: #2c3a49;
     }
     button {
-      margin-top: 30px;
+      margin-top: 35px;
+      width: 100%;
+      padding: 16px 0;
       background-color: #ff7f50;
       border: none;
-      color: white;
-      padding: 14px 0;
-      font-size: 1.1rem;
+      border-radius: 14px;
+      font-size: 1.2rem;
       font-weight: 700;
-      border-radius: 12px;
+      color: white;
       cursor: pointer;
-      width: 100%;
-      transition: background-color 0.3s ease;
+      box-shadow: 0 6px 18px rgba(255, 127, 80, 0.7);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
     }
-    button:hover {
+    button:hover, button:focus {
       background-color: #e0673a;
+      box-shadow: 0 8px 24px rgba(224, 103, 58, 0.9);
+      outline: none;
+    }
+    /* Hide the honeypot field visually */
+    .hidden-field {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+      height: 0;
+      width: 0;
+      overflow: hidden;
+    }
+    /* Placeholder text color */
+    ::placeholder {
+      color: #aaa;
+      opacity: 1;
+    }
+    /* Responsive */
+    @media (max-width: 520px) {
+      form {
+        max-width: 90vw;
+        padding: 25px 20px 30px;
+      }
+      h2 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+      }
+      label {
+        font-size: 0.95rem;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      select,
+      input[type="file"] {
+        font-size: 0.95rem;
+      }
+      button {
+        font-size: 1.1rem;
+        padding: 14px 0;
+      }
     }
   </style>
 </head>
 <body>
 
-  <form name="it-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="/thanks.html">
-    <!-- Campo escondido para bots -->
+  <form name="it-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="/thanks.html" novalidate>
+    <!-- Honeypot field -->
+    <div class="hidden-field">
+      <label>Don’t fill this out if you're human: <input name="bot-field" autocomplete="off" tabindex="-1" /></label>
+    </div>
+
     <input type="hidden" name="form-name" value="it-application" />
-    <p style="display:none">
-      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-    </p>
 
     <h2>IT Job Application Form</h2>
 
     <label for="name">Full Name:</label>
-    <input type="text" id="name" name="full-name" required />
+    <input type="text" id="name" name="full-name" placeholder="Your full name" required autocomplete="name" />
 
     <label for="email">Email Address:</label>
-    <input type="email" id="email" name="email" required />
+    <input type="email" id="email" name="email" placeholder="example@mail.com" required autocomplete="email" />
 
     <label for="phone">Mobile Phone:</label>
-    <input type="tel" id="phone" name="mobile-phone" pattern="^(\(\d{3}\)\s?|\d{3}[-\s]?)?\d{3}[-\s]?\d{4}$" placeholder="(123) 456-7890" required title="Please enter phone number like (123) 456-7890 or 123-456-7890" inputmode="tel" />
+    <input type="tel" id="phone" name="mobile-phone" pattern="^(\(\d{3}\)\s?|\d{3}[-\s]?)?\d{3}[-\s]?\d{4}$" placeholder="(123) 456-7890" required title="Please enter phone number like (123) 456-7890 or 123-456-7890" inputmode="tel" autocomplete="tel" />
 
     <label for="address">Full Address:</label>
-    <input type="text" id="address" name="full-address" required />
+    <input type="text" id="address" name="full-address" placeholder="Street, number, etc." required autocomplete="street-address" />
 
     <label for="city">City:</label>
-    <input type="text" id="city" name="city" required />
+    <input type="text" id="city" name="city" placeholder="Your city" required autocomplete="address-level2" />
 
     <label for="state">State:</label>
-    <select id="state" name="state" required>
+    <select id="state" name="state" required autocomplete="address-level1">
       <option value="" disabled selected>Select your state</option>
       <option value="CA">California</option>
       <option value="NY">New York</option>
@@ -127,8 +196,8 @@
     <label for="experience">Do you have professional IT experience?</label>
     <select id="experience" name="it-experience" required>
       <option value="" disabled selected>Select an option</option>
-      <option>Yes</option>
-      <option>No</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
     </select>
 
     <label for="years-experience">If yes, how many years?</label>
