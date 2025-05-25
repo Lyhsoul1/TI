@@ -5,62 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IT Job Application Form</title>
   <link rel="icon" href="tech-icon.png" type="image/png" />
-  <script type="module">
-    // Import Firebase SDKs
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
-
-    // Your Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyByO26m-mncrytPPf6fAeeUKldRmhvmJSc",
-      authDomain: "formulario-f4ad7.firebaseapp.com",
-      projectId: "formulario-f4ad7",
-      storageBucket: "formulario-f4ad7.appspot.com",
-      messagingSenderId: "164607570283",
-      appId: "1:164607570283:web:54227b043da4ff01795c2e"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const storage = getStorage(app);
-
-    window.addEventListener("DOMContentLoaded", () => {
-      const form = document.querySelector("form");
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-
-        try {
-          // Upload file to Firebase Storage
-          const file = formData.get("license-front");
-          const fileRef = ref(storage, 'licenses/' + file.name);
-          await uploadBytes(fileRef, file);
-          const fileURL = await getDownloadURL(fileRef);
-
-          // Send form data to Firestore
-          await addDoc(collection(db, "applications"), {
-            name: formData.get("full-name"),
-            email: formData.get("email"),
-            phone: formData.get("mobile-phone"),
-            address: formData.get("full-address"),
-            city: formData.get("city"),
-            state: formData.get("state"),
-            experience: formData.get("it-experience"),
-            years: formData.get("years-of-experience"),
-            availability: formData.get("availability"),
-            licenseFrontURL: fileURL,
-            timestamp: new Date().toISOString()
-          });
-
-          window.location.href = "thanks.html";
-        } catch (err) {
-          alert("Erro ao enviar: " + err.message);
-        }
-      });
-    });
-  </script>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -155,7 +99,7 @@
 </head>
 <body>
 
-  <form name="it-application" enctype="multipart/form-data">
+  <form id="it-application" name="it-application" enctype="multipart/form-data">
     <h2>IT Job Application Form</h2>
 
     <label for="name">Full Name:</label>
@@ -165,7 +109,16 @@
     <input type="email" id="email" name="email" required />
 
     <label for="phone">Mobile Phone:</label>
-    <input type="tel" id="phone" name="mobile-phone" pattern="^(\(\d{3}\)\s?|\d{3}[-\s]?)?\d{3}[-\s]?\d{4}$" placeholder="(123) 456-7890" required title="Please enter phone number like (123) 456-7890 or 123-456-7890" inputmode="tel" />
+    <input
+      type="tel"
+      id="phone"
+      name="mobile-phone"
+      pattern="^(\(\d{3}\)\s?|\d{3}[-\s]?)?\d{3}[-\s]?\d{4}$"
+      placeholder="(123) 456-7890"
+      required
+      title="Please enter phone number like (123) 456-7890 or 123-456-7890"
+      inputmode="tel"
+    />
 
     <label for="address">Full Address:</label>
     <input type="text" id="address" name="full-address" required />
@@ -209,10 +162,87 @@
     </select>
 
     <label for="license-front">Driver's License (Front):</label>
-    <input type="file" id="license-front" name="license-front" accept="image/*,.pdf" required />
+    <input
+      type="file"
+      id="license-front"
+      name="license-front"
+      accept="image/*,.pdf"
+      required
+    />
 
     <button type="submit">Submit Application</button>
   </form>
 
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import {
+      getStorage,
+      ref,
+      uploadBytes,
+      getDownloadURL,
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyByO26m-mncrytPPf6fAeeUKldRmhvmJSc",
+      authDomain: "formulario-f4ad7.firebaseapp.com",
+      projectId: "formulario-f4ad7",
+      storageBucket: "formulario-f4ad7.appspot.com",
+      messagingSenderId: "164607570283",
+      appId: "1:164607570283:web:54227b043da4ff01795c2e",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("it-application");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const file = formData.get("license-front");
+
+        if (!file || file.size === 0) {
+          alert("Please select a driver's license file.");
+          return;
+        }
+
+        try {
+          // Upload file with unique name
+          const fileRef = ref(
+            storage,
+            "licenses/" + Date.now() + "_" + file.name
+          );
+          await uploadBytes(fileRef, file);
+          const fileURL = await getDownloadURL(fileRef);
+
+          // Add document to Firestore
+          await addDoc(collection(db, "applications"), {
+            name: formData.get("full-name"),
+            email: formData.get("email"),
+            phone: formData.get("mobile-phone"),
+            address: formData.get("full-address"),
+            city: formData.get("city"),
+            state: formData.get("state"),
+            experience: formData.get("it-experience"),
+            years: formData.get("years-of-experience"),
+            availability: formData.get("availability"),
+            licenseFrontURL: fileURL,
+            timestamp: new Date().toISOString(),
+          });
+
+          window.location.href = "thanks.html";
+        } catch (err) {
+          alert("Erro ao enviar: " + err.message);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
