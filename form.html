@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IT Job Application - California</title>
+  <title>IT Job Application - California Focus</title>
   <style>
     body {
       margin: 0;
@@ -17,7 +17,7 @@
     }
 
     .form-container {
-      background-color: rgba(255, 255, 255, 0.95);
+      background-color: rgba(255, 255, 255, 0.96);
       padding: 30px 40px;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -84,62 +84,16 @@
       <label for="phone">Phone Number:</label>
       <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" required>
 
-      <label for="location">City:</label>
-      <select id="location" name="location" required>
-        <option value="" disabled selected>Select your city</option>
-        <option value="Montgomery, Alabama">Montgomery, Alabama</option>
-        <option value="Juneau, Alaska">Juneau, Alaska</option>
-        <option value="Phoenix, Arizona">Phoenix, Arizona</option>
-        <option value="Little Rock, Arkansas">Little Rock, Arkansas</option>
-        <option value="Sacramento, California">Sacramento, California</option>
-        <option value="Denver, Colorado">Denver, Colorado</option>
-        <option value="Hartford, Connecticut">Hartford, Connecticut</option>
-        <option value="Dover, Delaware">Dover, Delaware</option>
-        <option value="Tallahassee, Florida">Tallahassee, Florida</option>
-        <option value="Atlanta, Georgia">Atlanta, Georgia</option>
-        <option value="Honolulu, Hawaii">Honolulu, Hawaii</option>
-        <option value="Boise, Idaho">Boise, Idaho</option>
-        <option value="Springfield, Illinois">Springfield, Illinois</option>
-        <option value="Indianapolis, Indiana">Indianapolis, Indiana</option>
-        <option value="Des Moines, Iowa">Des Moines, Iowa</option>
-        <option value="Topeka, Kansas">Topeka, Kansas</option>
-        <option value="Frankfort, Kentucky">Frankfort, Kentucky</option>
-        <option value="Baton Rouge, Louisiana">Baton Rouge, Louisiana</option>
-        <option value="Augusta, Maine">Augusta, Maine</option>
-        <option value="Annapolis, Maryland">Annapolis, Maryland</option>
-        <option value="Boston, Massachusetts">Boston, Massachusetts</option>
-        <option value="Lansing, Michigan">Lansing, Michigan</option>
-        <option value="Saint Paul, Minnesota">Saint Paul, Minnesota</option>
-        <option value="Jackson, Mississippi">Jackson, Mississippi</option>
-        <option value="Jefferson City, Missouri">Jefferson City, Missouri</option>
-        <option value="Helena, Montana">Helena, Montana</option>
-        <option value="Lincoln, Nebraska">Lincoln, Nebraska</option>
-        <option value="Carson City, Nevada">Carson City, Nevada</option>
-        <option value="Concord, New Hampshire">Concord, New Hampshire</option>
-        <option value="Trenton, New Jersey">Trenton, New Jersey</option>
-        <option value="Santa Fe, New Mexico">Santa Fe, New Mexico</option>
-        <option value="Albany, New York">Albany, New York</option>
-        <option value="Raleigh, North Carolina">Raleigh, North Carolina</option>
-        <option value="Bismarck, North Dakota">Bismarck, North Dakota</option>
-        <option value="Columbus, Ohio">Columbus, Ohio</option>
-        <option value="Oklahoma City, Oklahoma">Oklahoma City, Oklahoma</option>
-        <option value="Salem, Oregon">Salem, Oregon</option>
-        <option value="Harrisburg, Pennsylvania">Harrisburg, Pennsylvania</option>
-        <option value="Providence, Rhode Island">Providence, Rhode Island</option>
-        <option value="Columbia, South Carolina">Columbia, South Carolina</option>
-        <option value="Pierre, South Dakota">Pierre, South Dakota</option>
-        <option value="Nashville, Tennessee">Nashville, Tennessee</option>
-        <option value="Austin, Texas">Austin, Texas</option>
-        <option value="Salt Lake City, Utah">Salt Lake City, Utah</option>
-        <option value="Montpelier, Vermont">Montpelier, Vermont</option>
-        <option value="Richmond, Virginia">Richmond, Virginia</option>
-        <option value="Olympia, Washington">Olympia, Washington</option>
-        <option value="Charleston, West Virginia">Charleston, West Virginia</option>
-        <option value="Madison, Wisconsin">Madison, Wisconsin</option>
-        <option value="Cheyenne, Wyoming">Cheyenne, Wyoming</option>
-      </select>
+      <label for="zipcode">ZIP Code:</label>
+      <input type="text" id="zipcode" name="zipcode" placeholder="Enter ZIP code (e.g. 91977)" required maxlength="5" pattern="\d{5}">
 
-      <label for="role">What type of IT position are you applying for?</label>
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" readonly>
+
+      <label for="state">State:</label>
+      <input type="text" id="state" name="state" readonly>
+
+      <label for="role">Position Applying For:</label>
       <select id="role" name="role" required>
         <option value="" disabled selected>Select a role</option>
         <option value="Frontend Developer">Frontend Developer</option>
@@ -186,7 +140,7 @@
     </form>
   </div>
 
-  <!-- ✅ Script para formatar automaticamente o número de telefone -->
+  <!-- Auto-format phone number -->
   <script>
     const phoneInput = document.getElementById('phone');
     phoneInput.addEventListener('input', function () {
@@ -200,6 +154,34 @@
         phoneInput.value = `(${area}) ${mid}`;
       } else if (x.length > 0) {
         phoneInput.value = `(${area}`;
+      }
+    });
+  </script>
+
+  <!-- Lookup ZIP code and autofill city/state -->
+  <script>
+    const zipInput = document.getElementById('zipcode');
+    const cityInput = document.getElementById('city');
+    const stateInput = document.getElementById('state');
+
+    zipInput.addEventListener('blur', () => {
+      const zip = zipInput.value.trim();
+      if (zip.length === 5) {
+        fetch(`https://api.zippopotam.us/us/${zip}`)
+          .then(res => {
+            if (!res.ok) throw new Error("ZIP not found");
+            return res.json();
+          })
+          .then(data => {
+            const place = data.places[0];
+            cityInput.value = place['place name'];
+            stateInput.value = place['state'];
+          })
+          .catch(() => {
+            cityInput.value = '';
+            stateInput.value = '';
+            alert('ZIP code not found. Please enter a valid US ZIP code.');
+          });
       }
     });
   </script>
