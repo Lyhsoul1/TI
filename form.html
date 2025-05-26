@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IT Job Application - USA & International</title>
+  <title>IT Job Application - California</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
       background-size: cover;
       display: flex;
       align-items: center;
@@ -82,7 +82,7 @@
       <input type="email" id="email" name="email" required>
 
       <label for="phone">Phone Number:</label>
-      <input type="tel" id="phone" name="phone" pattern="\(\d{3}\)\s\d{3}-\d{4}" placeholder="(123) 456-7890" required>
+      <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" required>
 
       <label for="location">Location:</label>
       <select id="location" name="location" required>
@@ -140,5 +140,24 @@
       <button type="submit">Submit Application</button>
     </form>
   </div>
+
+  <!-- ✅ Script para formatar automaticamente o número de telefone -->
+  <script>
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', function(e) {
+      let x = phoneInput.value.replace(/\D/g, '').substring(0, 10); // limita a 10 dígitos
+      const areaCode = x.substring(0, 3);
+      const middle = x.substring(3, 6);
+      const last = x.substring(6, 10);
+
+      if (x.length > 6) {
+        phoneInput.value = `(${areaCode}) ${middle}-${last}`;
+      } else if (x.length > 3) {
+        phoneInput.value = `(${areaCode}) ${middle}`;
+      } else if (x.length > 0) {
+        phoneInput.value = `(${areaCode}`;
+      }
+    });
+  </script>
 </body>
 </html>
