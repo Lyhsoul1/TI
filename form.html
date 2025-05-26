@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1581092334653-a6c7d5d3121b?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
       background-size: cover;
       display: flex;
       align-items: center;
@@ -84,13 +84,59 @@
       <label for="phone">Phone Number:</label>
       <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" required>
 
-      <label for="location">Location:</label>
+      <label for="location">City:</label>
       <select id="location" name="location" required>
-        <option value="" disabled selected>Select your location</option>
-        <option value="California">California</option>
-        <option value="Other US State">Other US State</option>
-        <option value="Canada">Canada</option>
-        <option value="Other Country">Other Country</option>
+        <option value="" disabled selected>Select your city</option>
+        <option value="Montgomery, Alabama">Montgomery, Alabama</option>
+        <option value="Juneau, Alaska">Juneau, Alaska</option>
+        <option value="Phoenix, Arizona">Phoenix, Arizona</option>
+        <option value="Little Rock, Arkansas">Little Rock, Arkansas</option>
+        <option value="Sacramento, California">Sacramento, California</option>
+        <option value="Denver, Colorado">Denver, Colorado</option>
+        <option value="Hartford, Connecticut">Hartford, Connecticut</option>
+        <option value="Dover, Delaware">Dover, Delaware</option>
+        <option value="Tallahassee, Florida">Tallahassee, Florida</option>
+        <option value="Atlanta, Georgia">Atlanta, Georgia</option>
+        <option value="Honolulu, Hawaii">Honolulu, Hawaii</option>
+        <option value="Boise, Idaho">Boise, Idaho</option>
+        <option value="Springfield, Illinois">Springfield, Illinois</option>
+        <option value="Indianapolis, Indiana">Indianapolis, Indiana</option>
+        <option value="Des Moines, Iowa">Des Moines, Iowa</option>
+        <option value="Topeka, Kansas">Topeka, Kansas</option>
+        <option value="Frankfort, Kentucky">Frankfort, Kentucky</option>
+        <option value="Baton Rouge, Louisiana">Baton Rouge, Louisiana</option>
+        <option value="Augusta, Maine">Augusta, Maine</option>
+        <option value="Annapolis, Maryland">Annapolis, Maryland</option>
+        <option value="Boston, Massachusetts">Boston, Massachusetts</option>
+        <option value="Lansing, Michigan">Lansing, Michigan</option>
+        <option value="Saint Paul, Minnesota">Saint Paul, Minnesota</option>
+        <option value="Jackson, Mississippi">Jackson, Mississippi</option>
+        <option value="Jefferson City, Missouri">Jefferson City, Missouri</option>
+        <option value="Helena, Montana">Helena, Montana</option>
+        <option value="Lincoln, Nebraska">Lincoln, Nebraska</option>
+        <option value="Carson City, Nevada">Carson City, Nevada</option>
+        <option value="Concord, New Hampshire">Concord, New Hampshire</option>
+        <option value="Trenton, New Jersey">Trenton, New Jersey</option>
+        <option value="Santa Fe, New Mexico">Santa Fe, New Mexico</option>
+        <option value="Albany, New York">Albany, New York</option>
+        <option value="Raleigh, North Carolina">Raleigh, North Carolina</option>
+        <option value="Bismarck, North Dakota">Bismarck, North Dakota</option>
+        <option value="Columbus, Ohio">Columbus, Ohio</option>
+        <option value="Oklahoma City, Oklahoma">Oklahoma City, Oklahoma</option>
+        <option value="Salem, Oregon">Salem, Oregon</option>
+        <option value="Harrisburg, Pennsylvania">Harrisburg, Pennsylvania</option>
+        <option value="Providence, Rhode Island">Providence, Rhode Island</option>
+        <option value="Columbia, South Carolina">Columbia, South Carolina</option>
+        <option value="Pierre, South Dakota">Pierre, South Dakota</option>
+        <option value="Nashville, Tennessee">Nashville, Tennessee</option>
+        <option value="Austin, Texas">Austin, Texas</option>
+        <option value="Salt Lake City, Utah">Salt Lake City, Utah</option>
+        <option value="Montpelier, Vermont">Montpelier, Vermont</option>
+        <option value="Richmond, Virginia">Richmond, Virginia</option>
+        <option value="Olympia, Washington">Olympia, Washington</option>
+        <option value="Charleston, West Virginia">Charleston, West Virginia</option>
+        <option value="Madison, Wisconsin">Madison, Wisconsin</option>
+        <option value="Cheyenne, Wyoming">Cheyenne, Wyoming</option>
       </select>
 
       <label for="role">What type of IT position are you applying for?</label>
@@ -103,7 +149,6 @@
         <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
         <option value="Data Analyst">Data Analyst</option>
         <option value="Project Manager">Project Manager</option>
-        <option value="Other">Other</option>
       </select>
 
       <label for="experience">Years of Experience:</label>
@@ -144,18 +189,17 @@
   <!-- ✅ Script para formatar automaticamente o número de telefone -->
   <script>
     const phoneInput = document.getElementById('phone');
-    phoneInput.addEventListener('input', function(e) {
-      let x = phoneInput.value.replace(/\D/g, '').substring(0, 10); // limita a 10 dígitos
-      const areaCode = x.substring(0, 3);
-      const middle = x.substring(3, 6);
+    phoneInput.addEventListener('input', function () {
+      let x = phoneInput.value.replace(/\D/g, '').substring(0, 10);
+      const area = x.substring(0, 3);
+      const mid = x.substring(3, 6);
       const last = x.substring(6, 10);
-
       if (x.length > 6) {
-        phoneInput.value = `(${areaCode}) ${middle}-${last}`;
+        phoneInput.value = `(${area}) ${mid}-${last}`;
       } else if (x.length > 3) {
-        phoneInput.value = `(${areaCode}) ${middle}`;
+        phoneInput.value = `(${area}) ${mid}`;
       } else if (x.length > 0) {
-        phoneInput.value = `(${areaCode}`;
+        phoneInput.value = `(${area}`;
       }
     });
   </script>
