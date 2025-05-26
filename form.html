@@ -119,4 +119,26 @@
       <input type="text" id="skills" name="skills" placeholder="e.g., JavaScript, Python, AWS" required>
 
       <label for="certifications">Do you hold any IT certifications?</label>
-      <select id="certifications" name="certifications" require
+      <select id="certifications" name="certifications" required>
+        <option value="" disabled selected>Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <label for="portfolio">Portfolio or LinkedIn URL:</label>
+      <input type="url" id="portfolio" name="portfolio" placeholder="https://">
+
+      <label for="availability">Availability to Start:</label>
+      <input type="date" id="availability" name="availability" required>
+
+      <label for="license">Upload your Driver’s License (front):</label>
+      <input type="file" id="license" name="license" accept=".jpg,.jpeg,.png,.pdf" required>
+
+      <label for="message">Additional Notes (optional):</label>
+      <textarea id="message" name="message" rows="4" placeholder="Anything else you’d like us to know?"></textarea>
+
+      <button type="submit">Submit Application</button>
+    </form>
+  </div>
+</body>
+</html>
