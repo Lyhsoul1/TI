@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>California IT Job Application</title>
+  <title>IT Job Application - USA & International</title>
   <style>
     body {
       margin: 0;
@@ -73,7 +73,7 @@
         <label>Don’t fill this out: <input name="bot-field" /></label>
       </p>
 
-      <h2>California IT Job Application</h2>
+      <h2>IT Job Application</h2>
 
       <label for="fullname">Full Name:</label>
       <input type="text" id="fullname" name="fullname" required>
@@ -84,8 +84,14 @@
       <label for="phone">Phone Number:</label>
       <input type="tel" id="phone" name="phone" pattern="\(\d{3}\)\s\d{3}-\d{4}" placeholder="(123) 456-7890" required>
 
-      <label for="city">City in California:</label>
-      <input type="text" id="city" name="city" required>
+      <label for="location">Location:</label>
+      <select id="location" name="location" required>
+        <option value="" disabled selected>Select your location</option>
+        <option value="California">California</option>
+        <option value="Other US State">Other US State</option>
+        <option value="Canada">Canada</option>
+        <option value="Other Country">Other Country</option>
+      </select>
 
       <label for="role">What type of IT position are you applying for?</label>
       <select id="role" name="role" required>
@@ -100,7 +106,7 @@
         <option value="Other">Other</option>
       </select>
 
-      <label for="experience">How many years of experience do you have in IT?</label>
+      <label for="experience">Years of Experience:</label>
       <select id="experience" name="experience" required>
         <option value="" disabled selected>Select</option>
         <option value="Less than 1 year">Less than 1 year</option>
@@ -109,30 +115,8 @@
         <option value="More than 5 years">More than 5 years</option>
       </select>
 
-      <label for="skills">List your top 3 technical skills:</label>
+      <label for="skills">Top 3 Technical Skills:</label>
       <input type="text" id="skills" name="skills" placeholder="e.g., JavaScript, Python, AWS" required>
 
       <label for="certifications">Do you hold any IT certifications?</label>
-      <select id="certifications" name="certifications" required>
-        <option value="" disabled selected>Select</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
-
-      <label for="portfolio">Portfolio or LinkedIn URL:</label>
-      <input type="url" id="portfolio" name="portfolio" placeholder="https://">
-
-      <label for="availability">When can you start?</label>
-      <input type="date" id="availability" name="availability" required>
-
-      <label for="license">Upload your Driver’s License (front):</label>
-      <input type="file" id="license" name="license" accept=".jpg,.jpeg,.png,.pdf" required>
-
-      <label for="message">Additional Notes (optional):</label>
-      <textarea id="message" name="message" rows="4" placeholder="Anything else you’d like us to know?"></textarea>
-
-      <button type="submit">Submit Application</button>
-    </form>
-  </div>
-</body>
-</html>
+      <select id="certifications" name="certifications" require
